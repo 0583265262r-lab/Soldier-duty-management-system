@@ -34,7 +34,7 @@ def get_user_choice() -> str:
     הפרדת קבלת קלט מהמשתמש מהלוגיקה של עיבוד הבחירה.
     מאפשר להחליף את שיטת הקלט בעתיד (למשל, GUI).
     """
-    get_user_choice=input("Please select an option (1-7): ").strip()
+    get_user_choice=input("Please select an option: \n").strip()
     return get_user_choice
 
         
@@ -56,8 +56,8 @@ def handle_add_soldier() -> None:
     """
 
     try:
-        soldier_id=int(input("please enter id: "))
-        soldier_name=input("please enter name: ")
+        soldier_id=int(input("please enter id: ").strip())
+        soldier_name=input("please enter name: ").strip()
         soldier_manager.add_soldier(soldier_id,soldier_name,data.soldiers)
         print(f"Soldier {soldier_name} has been successfully added to the system!")
     except ValueError as e:
@@ -80,7 +80,7 @@ def handle_remove_soldier() -> None:
     משתמש בפונקציה remove_soldier()
     """
     try:
-        soldier_id=int(input("please enter id: "))
+        soldier_id=int(input("please enter id: ").strip())
         soldier_manager.remove_soldier(soldier_id,data.soldiers)
         print("The soldier was successfully removed from the system.")
     except ValueError as e:
@@ -122,9 +122,9 @@ def handle_add_duty() -> None:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
     try:
-        soldier_id=int(input("please enter id: "))
-        duty_name=input("please enter a duty: ")
-        day=input("please enter a day: ")
+        soldier_id=int(input("please enter id: ").strip())
+        duty_name=input("please enter a duty: ").strip()
+        day=input("please enter a day: ").strip().lower()
         duty_manager.add_duty_to_soldier(soldier_id,duty_name,day,data.soldiers)
     except ValueError as e:
         print(f" ERROR {e}")
@@ -145,9 +145,9 @@ def handle_update_duty_status() -> None:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
     try:
-        soldier_id=int(input("please enter id: "))
+        soldier_id=int(input("please enter id: ").strip())
         duty_name=input("please enter a duty :").strip()
-        new_status=input("please enter a new status: ").strip()
+        new_status=input("please enter a new status: ").strip().lower()
         duty_manager.update_duty_status(soldier_id,duty_name,new_status,data.soldiers)
     except ValueError as e:
         print(f"error {e}")
@@ -172,7 +172,7 @@ def handle_view_soldier_duties() -> None:
     """
     try:
 
-        soldier_id=int(input("please enter id: "))
+        soldier_id=int(input("please enter id: ").strip())
         print(f"\n--- Duty for soldier {soldier_id} ---")
         print(duty_manager.get_soldier_duties(soldier_id,data.soldiers))
     
@@ -198,24 +198,28 @@ def main() -> None:
     while True:
         show_menu()
         user_choice=get_user_choice()
-        
-        if user_choice == "1":
-            handle_add_soldier()
-        if user_choice == "2":
-            handle_remove_soldier()
-        if user_choice =="3":
-            handle_view_soldiers()
-        if user_choice == "4":
-            handle_add_duty()
-        if user_choice =="5":
-            handle_update_duty_status()
-        if user_choice == "6":
-            handle_view_soldier_duties()
-        if user_choice == "7":
-            print("\n Logging out")
-            break
-        else:
-            print("invalid input please enetr number between 1-7 ")
+        match user_choice:
+            case "1":
+                handle_add_soldier()
+            case "2":
+                handle_remove_soldier()
+            case "3":
+                handle_view_soldiers()
+            case "4":
+                handle_add_duty()
+            case "5":
+                handle_update_duty_status()
+            case "6":
+                handle_view_soldier_duties()
+            case "7":
+                print("\n Logging out")
+                break
+            case _:
+                print("invalid input please enetr number between 1-7 ")
+
+
+
+
 
 if __name__ == "__main__":
     main()
