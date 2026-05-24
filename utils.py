@@ -1,5 +1,7 @@
 import data
-def find_soldier_by_id(soldier_id: int) -> dict | None:
+VALID_STATUS=["pending", "completed", "missed"]
+VALID_DAYS=["sunday","monday","tuesday","wednesday","thursday"]
+def find_soldier_by_id(soldier_id: int,soldiers) -> dict | None:
     """
     מחפשת חייל לפי id ומחזירה אותו.
     
@@ -19,8 +21,9 @@ def find_soldier_by_id(soldier_id: int) -> dict | None:
     יש פונקציה אחת שעושה את זה.
     מחזירה None במקום לזרוק exception - מאפשרת גמישות.
     """
-    for s in data.soldiers:
-        if s[id]== soldier_id:
+    
+    for s in soldiers:
+        if s["id"]== soldier_id:
             return s
     return None
         
@@ -55,7 +58,7 @@ def find_duty_by_name(duties: list, duty_name: str) -> dict | None:
     
 
 
-def is_valid_status(status: str) -> bool:
+def is_valid_status(status: str,valid_status) -> bool:
     """
     בודקת אם סטטוס הוא חוקי.
     
@@ -76,8 +79,8 @@ def is_valid_status(status: str) -> bool:
     גם מקל על שינוי הסטטוסים החוקיים בעתיד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    VALID_STATUS=["pending", "completed", "missed"]
-    return status in VALID_STATUS
+    
+    return status in valid_status
   
 
 
@@ -134,7 +137,7 @@ def soldier_has_duty(soldier: dict, duty_name: str) -> bool:
 
 
 
-def is_valid_day(day: str) -> bool:
+def is_valid_day(day: str,valid_day) -> bool:
     """
 
     בודקת אם יום הוא חוקי (לא שישי או שבת).
@@ -156,8 +159,8 @@ def is_valid_day(day: str) -> bool:
     בעתיד אפשר לשנות את הימים החוקיים במקום אחד.
     פונקציות validation מחזירות bool ולא זורקות exceptions.
     """
-    DAYS=["sunday","monday","tuesday","wednesday","thursday"]
-    return day in DAYS
+    
+    return day in valid_day
 
 
 
