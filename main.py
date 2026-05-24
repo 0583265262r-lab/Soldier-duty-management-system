@@ -1,4 +1,4 @@
-import data,soldier_manager,duty_manager,utils
+import data,soldier_manager,duty_manager
 
 
 
@@ -54,10 +54,12 @@ def handle_add_soldier() -> None:
     main.py אחראי על אינטראקציה עם המשתמש,
     soldier_manager.py אחראי על הלוגיקה.
     """
+
     try:
         soldier_id=int(input("please enter id: "))
         soldier_name=input("please enter name: ")
         soldier_manager.add_soldier(soldier_id,soldier_name,data.soldiers)
+        print(f"Soldier {soldier_name} has been successfully added to the system!")
     except ValueError as e:
         print(f"Error input {e}")
 
@@ -80,8 +82,11 @@ def handle_remove_soldier() -> None:
     try:
         soldier_id=int(input("please enter id: "))
         soldier_manager.remove_soldier(soldier_id,data.soldiers)
+        print("The soldier was successfully removed from the system.")
     except ValueError as e:
         print(f"Error input {e}")
+    except KeyError as e:
+        print(f"ERROR {e}")
         
 
     # pass
@@ -98,7 +103,7 @@ def handle_view_soldiers() -> None:
     למה הפונקציה קיימת:
     הפרדה בין קבלת הנתונים לבין הצגתם.
     """
-
+    print("\n--- List of soldiers ---")
     handle_view_soldiers=soldier_manager.get_all_soldiers(data.soldiers)
     print(handle_view_soldiers)
 
@@ -166,7 +171,9 @@ def handle_view_soldier_duties() -> None:
     הפרדה בין UI לבין לוגיקה עסקית.
     """
     try:
+
         soldier_id=int(input("please enter id: "))
+        print(f"\n--- Duty for soldier {soldier_id} ---")
         print(duty_manager.get_soldier_duties(soldier_id,data.soldiers))
     
     except ValueError as e:
@@ -205,6 +212,7 @@ def main() -> None:
         if user_choice == "6":
             handle_view_soldier_duties()
         if user_choice == "7":
+            print("\n Logging out")
             break
         else:
             print("invalid input please enetr number between 1-7 ")
