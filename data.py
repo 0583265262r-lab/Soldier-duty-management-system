@@ -1,2 +1,2 @@
-
+# github = https://github.com/0583265262r-lab/Soldier-duty-management-system
 soldiers = [{'id' : 123456, 'name' : 'bob', 'duties' :[{"name" : 'clean kitchen', "day" : "sunday", "status" : "pending"}]}]

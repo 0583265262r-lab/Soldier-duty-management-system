@@ -10,8 +10,7 @@ def show_menu() -> None:
     מקבלת: כלום
     מחזירה: כלום (מדפיסה לקונסול)
     
-    למה הפונקציה קיימת:
-    הפרדה בין הצגת התפריט לבין הלוגיקה העסקית.
+    והפרדה בין הצגת התפריט לבין הלוגיקה  
     אם נרצה לשנות את התצוגה, נשנה רק כאן.
     """
     print("ADD SOLDIER   1\n" \
@@ -35,7 +34,7 @@ def get_user_choice() -> str:
     הפרדת קבלת קלט מהמשתמש מהלוגיקה של עיבוד הבחירה.
     מאפשר להחליף את שיטת הקלט בעתיד (למשל, GUI).
     """
-    get_user_choice=input("Please select an option (1-6): ").strip()
+    get_user_choice=input("Please select an option (1-7): ").strip()
     return get_user_choice
 
         
@@ -76,6 +75,7 @@ def handle_remove_soldier() -> None:
     
     למה הפונקציה קיימת:
     הפרדה בין UI לבין לוגיקה עסקית.
+    משתמש בפונקציה remove_soldier()
     """
     try:
         soldier_id=int(input("please enter id: "))
@@ -206,6 +206,8 @@ def main() -> None:
             handle_view_soldier_duties()
         if user_choice == "7":
             break
+        else:
+            print("invalid input please enetr number between 1-7 ")
 
 if __name__ == "__main__":
     main()
